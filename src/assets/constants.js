@@ -31,6 +31,7 @@ export default {
         REGISTARTION_HEADING:'Please provide us with your information.',
         USER_NAME:'Name',
         EMAIL:'Email',
+        OTP:'OTP',
         PASSWORD:'Password',
         CONFIRM_PASSWORD:'Confirm Password',
         ALREADY_AC:'Already have an account? Sign in',
@@ -60,10 +61,12 @@ export default {
         PRIVACY_POLICY:'Privacy Policy',
         ABOUT_APP:'About the App',
         LOGOUT:'Log out',
+        VERIFY:'Verify',
         PASSWORD_SENT_MSG:'We have sent an email to you with password recover instructions.',
         PASSWORD_SKIP_MSG:'Skip, I\'ll confirm later',
         NOT_GET_MAIL_PASSWORD:'Haven\'t received email yet? Please check your spam folder or try with a different email address',
         RESET_PASSWORD:'Reset Password',
+        RESET_BUTTON:'Send Reset Link',
         RESET_PASSWORD_SCREEN_TITLE:'Always better to have unique passwords.',
         START_TRACKING_GREEN:'Start Tracking Green Activity',
         START_SUSTAN:'Start Tracking Sustainable Activity',
@@ -74,5 +77,10 @@ export default {
         SEARCH_NEARBY_PARK:'Do you want to find nearby parks?',
         NOT_GREEN_SPACE:'You are not in green space yet',
 
-    }
+    },
+    APP_FONTS: {
+        REGULAR: 'OpenSans-Regular',
+        O_BOLD: 'OpenSans-Bold',
+        C_BOLD: 'Comfortaa-Bold',
+      },
 }

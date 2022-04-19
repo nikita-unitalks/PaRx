@@ -7,20 +7,19 @@ import {
   Dimensions,
   View,
 } from 'react-native';
-import { Male } from '../images/male.png';
-import Constants from '../SupportingClasses/Constants';
-
+import constants from '../assets/constants';
 
 export const AppThemeButton = ({
   title,
   onPressButton,
   style,
+  textSyle
 }) => {
   return (
     <TouchableOpacity
       style={[styles.buttonHover, { flexDirection: 'row' }, style]}
       onPress={onPressButton}>
-      <Text style={styles.textStyle}>{title}</Text>
+      <Text style={[styles.textStyle,textSyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -36,27 +35,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.5,
     elevation: 8,
     shadowRadius: 5,
+    borderColor:'#FFFFFF',
     shadowOffset: { width: 1, height: 5 },
     color: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent:'center'
   },
   textStyle: {
-    color: 'white',
+    color: '#5A8A4D',
     fontSize: 15,
-    fontFamily: Constants.APP_FONTS.SEMI_BOLD,
     fontSize: 18,
+    fontFamily:constants.APP_FONTS.C_BOLD,
+   
+    textAlign:'center'
   },
 
   textAddressStyle: {
     color: 'white',
     fontSize: 14,
-    fontFamily: Constants.APP_FONTS.ITALIC,
   },
   emptyDataSetStyle: {
     color: 'gray',
     fontSize: 13,
-    fontFamily: Constants.APP_FONTS.MEDIUM,
+  
     position: 'absolute',
     alignSelf: 'center',
     elevation: 20,

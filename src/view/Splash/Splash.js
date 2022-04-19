@@ -10,21 +10,14 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import PagerView from 'react-native-pager-view';
-import pagebg from '../../assets/images/pager_bg.png';
+import { PagerBg } from '@images';
 
-import {
-  ScalingDot,
-  SlidingBorder,
-  ExpandingDot,
-  SlidingDot,
-} from 'react-native-animated-pagination-dots';
 import Constants from '../../assets/constants';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 
 
-export default function Splash() {
+export default function Splash({ navigation }) {
 
   let slider = useRef()
   const INTRO_DATA = [
@@ -32,80 +25,74 @@ export default function Splash() {
       key: 1,
       title: Constants.APP_STRINGS.PAGER_1_HEADING,
       text: Constants.APP_STRINGS.PAGER_1_TITLE,
-      image: require('../../assets/images/pager_map_icon.png'),
+      image: require('../../images/pager_map_icon.png'),
       backgroundColor: '#22bcb5',
     },
     {
       key: 2,
       title: Constants.APP_STRINGS.PAGER_2_HEADING,
       text: Constants.APP_STRINGS.PAGER_2_TITLE,
-      image: require('../../assets/images/pager_2.png'),
+      image: require('../../images/pager_2.png'),
       backgroundColor: '#22bcb5',
     },
     {
       key: 3,
       title: Constants.APP_STRINGS.PAGER_3_HEADING,
       text: Constants.APP_STRINGS.PAGER_3_TITLE,
-      image: require('../../assets/images/pager_3.png'),
+      image: require('../../images/pager_3.png'),
       backgroundColor: '#22bcb5',
     },
     {
       key: 4,
-      title:Constants.APP_STRINGS.PAGER_4_HEADING,
+      title: Constants.APP_STRINGS.PAGER_4_HEADING,
       text: Constants.APP_STRINGS.PAGER_4_TITLE,
-      image: require('../../assets/images/pager_4.png'),
+      image: require('../../images/pager_4.png'),
       backgroundColor: '#22bcb5',
     },
     {
       key: 5,
       title: Constants.APP_STRINGS.PAGER_5_HEADING,
       text: Constants.APP_STRINGS.PAGER_5_TITLE,
-      image: require('../../assets/images/pager_5.png'),
+      image: require('../../images/pager_5.png'),
       backgroundColor: '#22bcb5',
     }
   ];
 
   const _renderPagination = (activeIndex: number) => (
-    <View style={styles.paginationContainer}>
-      <SafeAreaView>
-        <View style={styles.paginationDots}>
-          {INTRO_DATA.length > 1 &&
-            INTRO_DATA.map((_, i) => (
-              <TouchableOpacity
-                key={i}
-                style={[
-                  styles.dot,
-                  i === activeIndex
-                    ? { backgroundColor: '#5A8A4D' }
-                    : { backgroundColor: '#E4E4E4' },
-                ]}
-                onPress={() => slider?.goToSlide(i, true)} />
-            ))}
+
+    <SafeAreaView>
+      <View style={{ flexDirection: 'row', alignContent: 'center', }}>
+        <View style={{
+          alignSelf: 'flex-start', bottom: 30,
+        }}>
+          <Text style={styles.textLeft}>Skip</Text>
         </View>
-
-      </SafeAreaView>
-    </View>
+        <View style={styles.paginationContainer}>
+          <View style={styles.paginationDots}>
+            {INTRO_DATA.length > 1 &&
+              INTRO_DATA.map((_, i) => (
+                <TouchableOpacity
+                  key={i}
+                  style={[
+                    styles.dot,
+                    i === activeIndex
+                      ? { backgroundColor: '#5A8A4D' }
+                      : { backgroundColor: '#E4E4E4' },
+                  ]}
+                  onPress={() => slider?.goToSlide(i, true)} />
+              ))}
+          </View>
+        </View>
+        <TouchableOpacity onPress={() => { navigation.navigate("SplashEnd") }} >
+          <View style={{
+            alignSelf: 'flex-end', bottom: 30,
+          }}>
+            <Text style={styles.textRight}>Next</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
-  const _renderNextButton = () => {
-    return (
-      <View style={{
-        alignSelf: 'flex-end'
-      }}>
-        <Text style={styles.textRight}>Next</Text>
-      </View>
-    );
-  };
-
-  const _renderSkipButton = () => {
-    return (
-      <View style={{
-        alignSelf: 'flex-start'
-      }}>
-        <Text style={styles.textLeft}>Skip</Text>
-      </View>
-    );
-  };
-
 
   const _renderItem = ({ item }) => {
     return (
@@ -121,28 +108,24 @@ export default function Splash() {
 
     );
   }
-
-
-
   return (
-    <ImageBackground style={styles.container} source={pagebg}>
-      <AppIntroSlider
-        style={{ flex: 1 }}
 
-        ref={(ref) => (slider = ref)}
+    <ImageBackground style={styles.container}
+      resizeMode="stretch"
+      source={PagerBg}>
+      <View style={{ flex: 1 }}>
+        <AppIntroSlider
+          style={{ flex: 1 }}
 
-        renderItem={_renderItem}
+          data={INTRO_DATA}
+          ref={(ref) => (slider = ref)}
 
-        data={INTRO_DATA}
-        showDoneButton={false}
-        showSkipButton={true}
-        activeDotStyle={{ width: 10, height: 10, borderRadius: 5, backgroundColor: '#5A8A4D' }}
-        dotStyle={styles.dot}
-        paginationStyle={{ color: '#121767', backgroundColor: 'red' }}
-        renderNextButton={_renderNextButton}
-        renderSkipButton={_renderSkipButton}
-      />
+          renderItem={_renderItem}
+          renderPagination={_renderPagination}
+
+        /></View>
     </ImageBackground>
+
   );
 }
 
@@ -178,19 +161,16 @@ const styles = StyleSheet.create({
   textRight: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
-    marginTop: 10,
-    paddingLeft: 30,
     alignSelf: 'flex-end',
-    paddingRight: 30,
+    paddingRight: 10,
     fontFamily: 'OpenSans-Bold',
     color: Constants.APP_COLOR.TEXT_GREEN
-  }, textLeft: {
+  },
+  textLeft: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
-    marginTop: 10,
-    paddingLeft: 30,
     alignSelf: 'flex-start',
-    paddingRight: 30,
+    paddingLeft: 10,
     fontFamily: 'OpenSans-Bold',
     color: Constants.APP_COLOR.TEXT_GREEN
   },
@@ -208,22 +188,22 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   paginationContainer: {
-    bottom: 16,
-
+    bottom: 30,
+    flex: 1,
+    alignItems: 'center', justifyContent: 'center'
   },
   paginationDots: {
-    width: 'auto',
     height: 16,
-    alignContent: 'center',
     flexDirection: 'row',
+    alignContent: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
   dot: {
     width: 10,
     height: 10,
     borderRadius: 5,
-
-    backgroundColor: '#E4E4E4'
+    alignSelf: 'center',
+    backgroundColor: '#E4E4E4',
+    marginLeft: 5, marginRight: 5
   },
 });
