@@ -18,7 +18,7 @@ import Header from '../../component/Header';
 import { AppThemeButton } from '../../component/Buttons';
 
 
-export default function ForgotPassword({ navigation }) {
+export default function Home({ navigation }) {
 
   return (
 
@@ -26,25 +26,11 @@ export default function ForgotPassword({ navigation }) {
       resizeMode="stretch"
       source={PagerBg}>
       <View style={{ flex: 1, }}>
-        <Header />
-        <Text style={styles.title}>{Constants.APP_STRINGS.FORGOT_PASSWORD}</Text>
-        <Text style={styles.text}>{Constants.APP_STRINGS.FORGOT_PASSWORD_TITLE}</Text>
-        <View
-          style={{ flex: 1, padding: 10 }}>
-          <View
-            style={styles.textVIew}>
-            <Text style={styles.textEmail}>{Constants.APP_STRINGS.EMAIL}</Text>
-            <TextInput style={styles.buttonStyle}
-              placeholder="Email"></TextInput>
-          </View>
-          <AppThemeButton title={Constants.APP_STRINGS.RESET_BUTTON}
-            onPressButton={() => {
-              navigation.navigate("ForgotPasswordVerify")
-            }}
-            style={styles.buttonCStyle}
-            textSyle={{ color: 'white' }} />
+     
+        <Text style={styles.title}>{Constants.APP_STRINGS.HOME}</Text>
+        
 
-        </View>
+      
       </View>
     </ImageBackground >
 
@@ -55,6 +41,23 @@ const styles = StyleSheet.create({
   textVIew: {
     marginLeft: 10,
     marginRight: 10,
+  },
+  buttonStyle: {
+    color: 'black',
+    borderColor: Constants.APP_COLOR.GREEN_COLOR,
+    borderWidth: 1,
+    alignSelf: 'center',
+    marginTop: 10,
+    paddingLeft: 10,
+    borderRadius: 10,
+
+    width: Dimensions.get('window').width - 50,
+  },
+  textPassword: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 14,
+    marginTop: 20,
+    paddingLeft: 10
   },
   textBottom: {
     position: 'absolute',

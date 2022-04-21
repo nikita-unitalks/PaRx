@@ -18,7 +18,7 @@ import Header from '../../component/Header';
 import { AppThemeButton } from '../../component/Buttons';
 
 
-export default function ForgotPassword({ navigation }) {
+export default function ChangePassword({ navigation }) {
 
   return (
 
@@ -27,20 +27,20 @@ export default function ForgotPassword({ navigation }) {
       source={PagerBg}>
       <View style={{ flex: 1, }}>
         <Header />
-        <Text style={styles.title}>{Constants.APP_STRINGS.FORGOT_PASSWORD}</Text>
+        <Text style={styles.title}>{Constants.APP_STRINGS.CHANGE_PASSWORD}</Text>
         <Text style={styles.text}>{Constants.APP_STRINGS.FORGOT_PASSWORD_TITLE}</Text>
         <View
           style={{ flex: 1, padding: 10 }}>
           <View
             style={styles.textVIew}>
-            <Text style={styles.textEmail}>{Constants.APP_STRINGS.EMAIL}</Text>
-            <TextInput style={styles.buttonStyle}
-              placeholder="Email"></TextInput>
+          <Text style={styles.textEmail}>{Constants.APP_STRINGS.EMAIL}</Text>
+          <TextInput style={styles.buttonStyle}
+            placeholder="Email"></TextInput>
           </View>
           <AppThemeButton title={Constants.APP_STRINGS.RESET_BUTTON}
-            onPressButton={() => {
-              navigation.navigate("ForgotPasswordVerify")
-            }}
+              onPressButton={() => {
+                navigation.navigate("ChangePasswordSet")
+              }}
             style={styles.buttonCStyle}
             textSyle={{ color: 'white' }} />
 

@@ -48,13 +48,13 @@ export default function Signin({ navigation }) {
 
           </View>
           <AppThemeButton title={Constants.APP_STRINGS.SIGN_IN}
-            onPressButton={{
-
+            onPressButton={() => {
+              navigation.navigate("BottomNavigation")
             }}
             style={styles.buttonCStyle}
             textSyle={{ color: 'white' }} />
           <TouchableOpacity
-            style={{   position: 'absolute',  bottom: 60,alignSelf:'center',justifyContent:'center'}}
+            style={{ position: 'absolute', bottom: 60, alignSelf: 'center', justifyContent: 'center' }}
             onPress={() => {
               navigation.navigate("ForgotPassword")
             }}>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textBottom: {
-    
+
     alignSelf: 'center',
     fontFamily: Constants.APP_FONTS.O_BOLD,
     fontSize: 16

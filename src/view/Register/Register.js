@@ -27,7 +27,7 @@ export default function Register({ navigation }) {
       resizeMode="stretch"
       source={PagerBg}>
       <View style={styles.container}>
-      <Header />
+        <Header />
         <ScrollView
           contentContianerStyle={{ backgroundColor: 'transaprent', }}
           showsVerticalScrollIndicator={false}>

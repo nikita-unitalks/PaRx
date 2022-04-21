@@ -5,9 +5,16 @@ export default {
         GRAY_BG:'#9D9D9D',
         ORANGE_BG:'#F05323',
         BLUE_BG:'#007AFF',
+        BG_COLOR:'#E5E5E5',
+        UNACTIVE_TEXT:'#808080',
+        BALCK:'#303030'
         
     },
     APP_STRINGS:{
+        HOME:'Home',
+        EXPLORE:'Explore',
+        JOURNAL:'Journal',
+        TIMER:'Timer',
         SKIP:'Skip',
         NEXT:'Next',
         START:'Start',

@@ -6,6 +6,14 @@ import Register from './Register/Register';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import ForgotPasswordVerify from './ForgotPassword/ForgotPasswordVerify';
 import ForgotPasswordSet from './ForgotPassword/ForgotPasswordSet';
+import Home from './Home/Home';
+import Graph from './Graph/Graph';
+import Timer from './Timer/Timer';
+import Tree from './Tree/Tree';
+import Settings from './Settings/Settings';
+import ChangePassword  from './ChnagePassword/ChangePassword';
+import ChangePasswordSet from './ChnagePassword/ChangePasswordSet';
+
 export{
 SplashScreen,
 SplashEnd,
@@ -14,5 +22,12 @@ Signin,
 Register,
 ForgotPassword,
 ForgotPasswordSet,
-ForgotPasswordVerify
+ForgotPasswordVerify,
+Home,
+Graph,
+Timer,
+Tree,
+Settings,
+ChangePassword,
+ChangePasswordSet
 }
