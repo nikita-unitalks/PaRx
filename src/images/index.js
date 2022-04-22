@@ -12,7 +12,12 @@ import BAGraph from './ic_graph_a.png';
 import BDGraph from './ic_graph_d.png';
 import SettingBg from './setting_bg.png';
 import Line from './line.png';
-import Logout from './log_out.png'
+import Logout from './log_out.png';
+import icCamera from './ic_camera.png';
+import icLocation from './ic_location.png';
+import leaf from './leaf.png';
+import time from './time.png';
+import good from  './good.png'
 
 export{
 LandingBg,
@@ -29,5 +34,10 @@ BDHome,
 BATree,
 SettingBg,
 Line,
-Logout
+Logout,
+icCamera,
+icLocation,
+leaf,
+time,
+good
 }

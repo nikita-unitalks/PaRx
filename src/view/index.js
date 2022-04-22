@@ -13,6 +13,8 @@ import Tree from './Tree/Tree';
 import Settings from './Settings/Settings';
 import ChangePassword  from './ChnagePassword/ChangePassword';
 import ChangePasswordSet from './ChnagePassword/ChangePasswordSet';
+import TermsCondition from './Settings/TermsConditions';
+import UserPre from './Settings/UserPre';
 
 export{
 SplashScreen,
@@ -29,5 +31,7 @@ Timer,
 Tree,
 Settings,
 ChangePassword,
-ChangePasswordSet
+ChangePasswordSet,
+TermsCondition,
+UserPre
 }

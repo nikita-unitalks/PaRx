@@ -1,35 +1,114 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
+  ScrollView,
   Animated,
   Dimensions, ImageBackground,
   TouchableOpacity,
   Image
 } from 'react-native';
-import { PagerBg,good,icLocation,leaf,time } from '@images';
+import { PagerBg } from '@images';
 
 import Constants from '../../assets/constants';
 import { TextInput } from 'react-native-gesture-handler';
 import Header from '../../component/Header';
 import { AppThemeButton } from '../../component/Buttons';
+import Slider from '@react-native-community/slider';
 
 
-export default function Timer({ navigation }) {
+export default function UserPre({ navigation }) {
+
+  const [isDaily, setIsDaily] = useState(true);
+  const WeeKView = ({ title }) => {
+    return (
+      <View style={styles.daysView} >
+        <Text style={styles.weekText}>{title}</Text>
+      </View>
+    )
+  }
+
+  const DailyView = () => {
+    return (
+      <>
+        <View style={styles.headingView}>
+          <View style={styles.lineView} />
+          <Text style={styles.options}>{Constants.APP_STRINGS.ON_THESE_DAYS}</Text>
+          <View style={styles.lineView} />
+        </View>
+
+        <View style={styles.headingView}>
+          <WeeKView title={'S'} />
+
+          <WeeKView title={'M'} />
+
+          <WeeKView title={'T'} />
+          <WeeKView title={'W'} />
+
+          <WeeKView title={'T'} />
+
+          <WeeKView title={'F'} />
+
+          <WeeKView title={'S'} />
+
+        </View>
+        <View style={styles.headingView}>
+          <View style={styles.lineView} />
+          <Text style={styles.options}>{Constants.APP_STRINGS.AMOUNT_TIME}</Text>
+          <View style={styles.lineView} />
+        </View>
+
+        <View style={styles.headingView}>
+
+          <TextInput style={{ width: 80, borderRadius: 10, backgroundColor: 'white', textAlign: 'center' }}></TextInput>
+          <Text style={styles.options}>{Constants.APP_STRINGS.HOURS_PER_DAY}</Text>
+        </View>
+      </>
+    );
+  }
+
+  const WeeklyView = () => {
+    return (
+      <>
+        <View style={styles.headingView}>
+          <View style={styles.lineView} />
+          <Text style={styles.options}>{Constants.APP_STRINGS.AMOUNT_TIME}</Text>
+          <View style={styles.lineView} />
+        </View>
+        <Slider
+          maximumValue={100}
+          minimumValue={0}
+          minimumTrackTintColor={Constants.APP_COLOR.GREEN_COLOR}
+          maximumTrackTintColor="#000000"
+          step={1}
+          value={1}
+          onValueChange={() => { }}
+          style={{ width: 300, height: 100, alignSelf: 'center' }}
+        />
+      </>
+    )
+  }
 
   return (
 
     <ImageBackground style={styles.container}
       resizeMode="stretch"
       source={PagerBg}>
-      <View style={{ flex: 1, }}>
-
-        <Text style={styles.title}>{Constants.APP_STRINGS.TIMER}</Text>
-       
-        <View style={styles.headingView}>
+      <View style={{ flex: 1, marginLeft: 15, marginRight: 15 }}>
+        <Header />
+        <ScrollView
+          contentContianerStyle={{ backgroundColor: 'transaprent', }}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.scrollViewContainer}>
+            <Text style={styles.title}>{Constants.APP_STRINGS.USER_PREFRENCE}</Text>
+            <View style={styles.headingView}>
+              <View style={styles.lineView} />
+              <Text style={styles.options}>{Constants.APP_STRINGS.REPEAT_TIME_MSG}</Text>
+              <View style={styles.lineView} />
+            </View>
+            <View style={styles.headingView}>
               <TouchableOpacity onPress={() => {
                 setIsDaily(true);
               }}>
@@ -46,7 +125,10 @@ export default function Timer({ navigation }) {
                 </View>
               </TouchableOpacity>
             </View>
+            {isDaily ? (<DailyView />) : <WeeklyView />}
 
+          </View>
+        </ScrollView>
       </View>
     </ImageBackground >
 
@@ -54,6 +136,21 @@ export default function Timer({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  lineView: {
+    alignSelf: 'center',
+    backgroundColor: Constants.APP_COLOR.GREEN_COLOR,
+    height: 1,
+    flex: 1,
+    borderStyle: 'solid'
+  },
+  headingView: {
+    padding: 10,
+    marginTop: 20,
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   inActiveView: {
     marginRight: 10,
     width: 120,
@@ -61,6 +158,14 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: 'white',
     padding: 10,
+    borderRadius: 10
+  },
+  daysView: {
+    marginLeft: 10,
+    alignSelf: 'center',
+    alignContent: 'center',
+    backgroundColor: 'white',
+    padding: 8,
     borderRadius: 10
   },
   activeView: {
@@ -72,6 +177,22 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10
   },
+  options: {
+    fontFamily: "Comfortaa-Bold",
+    color: Constants.APP_COLOR.DARK_GREY,
+    fontSize: 12,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center'
+  },
+  weekText: {
+    fontFamily: Constants.APP_FONTS.REGULAR,
+    color: Constants.APP_COLOR.DARK_GREY,
+    fontSize: 12,
+    paddingLeft: 8,
+    paddingRight: 8,
+    textAlign: 'center'
+  },
   optionsText: {
     fontFamily: Constants.APP_FONTS.REGULAR,
     color: Constants.APP_COLOR.DARK_GREY,
@@ -80,14 +201,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     textAlign: 'center'
   },
-  headingView: {
-    padding: 10,
-    marginTop: 20,
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   optionsTextA: {
     fontFamily: Constants.APP_FONTS.REGULAR,
     color: 'white',
@@ -95,10 +208,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     textAlign: 'center'
-  },
-  textVIew: {
-    marginLeft: 10,
-    marginRight: 10,
   },
   buttonStyle: {
     color: 'black',
@@ -145,9 +254,17 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
-  pagerView: {
+  scrollViewContainer: {
+    backgroundColor: 'transaprent',
     flex: 1,
-    backgroundColor: 'trasnparent'
+    //justifyContent: 'center',
+
+  },
+  root: {
+
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'transaprent',
   },
   container: {
     alignContent: 'center',
@@ -202,7 +319,7 @@ const styles = StyleSheet.create({
     fontFamily: "Comfortaa-Bold",
     color: Constants.APP_COLOR.TEXT_GREEN,
     fontSize: 24,
-    marginTop: 20,
+    marginTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
     textAlign: 'center'

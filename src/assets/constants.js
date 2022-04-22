@@ -7,7 +7,9 @@ export default {
         BLUE_BG:'#007AFF',
         BG_COLOR:'#E5E5E5',
         UNACTIVE_TEXT:'#808080',
-        BALCK:'#303030'
+        BALCK:'#303030',
+        DARK_GREY:'#464646',
+        LIGHT_GRAY:'#666666'
         
     },
     APP_STRINGS:{
@@ -54,15 +56,19 @@ export default {
         NOIFICATION_TITLE:'Park Px would like to send you notificaitons to keep you motivated on your journey',
         NO_THANKS:'No thanks',
         YES_PLEASE:'Yes please',
+        DAILY:'Daily',
+        WEEKLY:'Weekly',
         DAILY_PROGRESS:'Daily Progress',
         WEEKLY_PROGRESS:'Weekly Progress',
         COMPLETE:'Complete',
         GOAL:'Goal',
         SETTINGS:'Settings',
         USER_PREFRENCE:'User Preferences',
+        ON_THESE_DAYS:'on these days',
         REPEAT_TIME_MSG:'I want to repeat spending time in green space',
         AMOUNT_TIME:'Amount of time I want to spend daily',
         SAVE:'Save',
+        HOURS_PER_DAY:'hours per day',
         CHANGE_PASSWORD:'Change Password',
         TERMS_OF_USE:'Terms of Use',
         PRIVACY_POLICY:'Privacy Policy',

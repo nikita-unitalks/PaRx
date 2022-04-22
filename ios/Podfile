@@ -19,6 +19,10 @@ target 'PaRx' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-slider', :path => '../node_modules/@react-native-community/slider'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'PaRxTests' do
     inherit! :complete
     # Pods for testing

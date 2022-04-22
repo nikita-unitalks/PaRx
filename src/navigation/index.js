@@ -15,7 +15,9 @@ import {
   Timer,
   Settings,
   ChangePassword,
-  ChangePasswordSet
+  ChangePasswordSet,
+  TermsCondition,
+  UserPre
 } from '../view';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
@@ -47,7 +49,9 @@ function AppNavigator() {
         <Stack.Screen name="ForgotPasswordSet" component={ForgotPasswordSet} />
         <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
-      <Stack.Screen name="ChangePasswordSet" component={ChangePasswordSet} />
+        <Stack.Screen name="ChangePasswordSet" component={ChangePasswordSet} />
+        <Stack.Screen name="TermsCondition" component={TermsCondition} />
+        <Stack.Screen name="UserPre" component={UserPre} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -74,7 +78,7 @@ function BottomNavigation() {
       swipeEnabled: true,
       animationEnabled: true,
       gestureEnabled: true,
-      headerShown:false
+      headerShown: false
     }}
       tabBarOptions={{
         activeTintColor: Constants.APP_COLOR.TEXT_GREEN,
@@ -161,7 +165,7 @@ function TimerStack() {
     <Stack.Navigator headerMode={"none"} initialRouteName={"Home"}>
 
       <Stack.Screen name="Timer" component={Settings} />
-     
+
     </Stack.Navigator>
   );
 }

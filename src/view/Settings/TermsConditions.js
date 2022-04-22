@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { PagerBg,good,icLocation,leaf,time } from '@images';
+import { PagerBg } from '@images';
 
 import Constants from '../../assets/constants';
 import { TextInput } from 'react-native-gesture-handler';
@@ -18,7 +18,7 @@ import Header from '../../component/Header';
 import { AppThemeButton } from '../../component/Buttons';
 
 
-export default function Timer({ navigation }) {
+export default function TermsCondition({ navigation }) {
 
   return (
 
@@ -26,27 +26,11 @@ export default function Timer({ navigation }) {
       resizeMode="stretch"
       source={PagerBg}>
       <View style={{ flex: 1, }}>
+     
+        <Text style={styles.title}>{Constants.APP_STRINGS.TERMS_OF_USE}</Text>
+        
 
-        <Text style={styles.title}>{Constants.APP_STRINGS.TIMER}</Text>
-       
-        <View style={styles.headingView}>
-              <TouchableOpacity onPress={() => {
-                setIsDaily(true);
-              }}>
-                <View style={styles.inActiveView} >
-                  <Text style={styles.optionsText}>{Constants.APP_STRINGS.DAILY}</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => {
-                setIsDaily(false);
-              }}>
-                <View style={styles.activeView} >
-                  <Text style={styles.optionsTextA}>{Constants.APP_STRINGS.WEEKLY}</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
+      
       </View>
     </ImageBackground >
 
@@ -54,48 +38,6 @@ export default function Timer({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  inActiveView: {
-    marginRight: 10,
-    width: 120,
-    alignSelf: 'center',
-    alignContent: 'center',
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 10
-  },
-  activeView: {
-    marginLeft: 10,
-    width: 120,
-    alignSelf: 'center',
-    alignContent: 'center',
-    backgroundColor: Constants.APP_COLOR.TEXT_GREEN,
-    padding: 10,
-    borderRadius: 10
-  },
-  optionsText: {
-    fontFamily: Constants.APP_FONTS.REGULAR,
-    color: Constants.APP_COLOR.DARK_GREY,
-    fontSize: 14,
-    paddingLeft: 10,
-    paddingRight: 10,
-    textAlign: 'center'
-  },
-  headingView: {
-    padding: 10,
-    marginTop: 20,
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  optionsTextA: {
-    fontFamily: Constants.APP_FONTS.REGULAR,
-    color: 'white',
-    fontSize: 14,
-    paddingLeft: 10,
-    paddingRight: 10,
-    textAlign: 'center'
-  },
   textVIew: {
     marginLeft: 10,
     marginRight: 10,
