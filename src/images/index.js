@@ -17,7 +17,9 @@ import icCamera from './ic_camera.png';
 import icLocation from './ic_location.png';
 import leaf from './leaf.png';
 import time from './time.png';
-import good from  './good.png'
+import good from  './good.png';
+import icForwardArrow from './ic_forward_arrow.png';
+import icBackWARDArrow from './ic_backward_arrow.png';
 
 export{
 LandingBg,
@@ -39,5 +41,7 @@ icCamera,
 icLocation,
 leaf,
 time,
-good
+good,
+icBackWARDArrow,
+icForwardArrow
 }

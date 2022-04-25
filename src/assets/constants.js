@@ -9,8 +9,8 @@ export default {
         UNACTIVE_TEXT:'#808080',
         BALCK:'#303030',
         DARK_GREY:'#464646',
-        LIGHT_GRAY:'#666666'
-        
+        LIGHT_GRAY:'#666666',
+        GRAPH_BAR_COLOR:'#CC6C4E'
     },
     APP_STRINGS:{
         HOME:'Home',

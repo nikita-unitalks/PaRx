@@ -1,43 +1,276 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
+  FlatList,
   Animated,
   Dimensions, ImageBackground,
   TouchableOpacity,
   Image
 } from 'react-native';
-import { PagerBg } from '@images';
+import { PagerBg, icBackWARDArrow, icForwardArrow, good, time, leaf, icLocation } from '@images';
 
 import Constants from '../../assets/constants';
 import { TextInput } from 'react-native-gesture-handler';
 import Header from '../../component/Header';
 import { AppThemeButton } from '../../component/Buttons';
+import { VictoryChart, VictoryBar, VictoryTheme } from "victory-native";
+let { width } = Dimensions.get('window');
+import moment from 'moment';
 
 
 export default function Graph({ navigation }) {
+  const [datee, setDate] = useState(moment());
+  const [startWeek, setStartWeek] = useState(moment().startOf('week'));
+  const [endweek, setEndWeek] = useState(moment().endOf('week'));
+  const [isDaily, setIsDaily] = useState(true);
+  const list = [
+    {
+      id: 1,
+      datee: "20-12-20210",
+      hours: "2 min",
+      address: 'Queen Elizabeth Park'
+    },
+    {
+      id: 2,
+      datee: "20-12-20210",
+      hours: "2 min",
+      address: 'Queen Elizabeth Park'
+    },
+    {
+      id: 3,
+      datee: "20-12-20210",
+      hours: "2 min",
+      address: 'Queen Elizabeth Park'
+    }
+  ]
 
+  const subtratDate = () => {
+    let startdate = moment(datee);
+    startdate = startdate.subtract(1, "days");
+    setDate(startdate);
+  }
+
+  const addDate = () => {
+    let startdate = moment(datee);
+    startdate = startdate.add(1, "days");
+    setDate(startdate);
+  }
+  const getLastWeek = () => {
+    let currentDate = moment(startWeek);
+    currentDate = currentDate.subtract(1, "weeks")
+    let weekStart = currentDate.clone().startOf('week');
+    let weekEnd = currentDate.clone().endOf('week');
+    setStartWeek(weekStart)
+    setEndWeek(weekEnd)
+  }
+  const getfutureWeek = () => {
+    let currentDate = moment(startWeek);
+    currentDate = currentDate.add(1, "weeks")
+    let weekStart = currentDate.clone().startOf('week');
+    let weekEnd = currentDate.clone().endOf('week');
+    setStartWeek(weekStart)
+    setEndWeek(weekEnd)
+  }
+
+  const Cal = () => {
+    return (
+      <View style={styles.calContainerView}>
+        <TouchableOpacity onPress={() => {
+          if (isDaily)
+            subtratDate()
+          else getLastWeek()
+        }}>
+          <Image source={icBackWARDArrow}></Image>
+        </TouchableOpacity>
+        <Text style={styles.calText}>
+          {isDaily ? datee.format("MMMM DD") : ("" + startWeek.format("MMMM DD") + " - " + endweek.format("MMMM DD"))}
+        </Text>
+        <TouchableOpacity onPress={() => {
+          if (isDaily)
+            addDate();
+          else getfutureWeek();
+        }}>
+          <Image source={icForwardArrow}></Image>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+  const data = [
+    { time: '1PM', hours: 3 },
+    { time: '2PM', hours: 6 },
+    { time: '3AM', hours: 1 },
+    { time: '4AM', hours: 5 },
+    { time: '5AM', hours: 8 },
+    { time: '9AM', hours: 2 },
+    { time: '7AM', hours: 6 }
+  ];
+  const renderListItem = ({ item }) => {
+    return (
+      <View
+        style={{ elevation: 5, alignItems: 'center', padding: 15, borderRadius: 10, backgroundColor: 'white', flexDirection: 'row', margin: 10 }}>
+
+        <View style={styles.imageView}>
+          <Image style={styles.userImage}
+            resizeMode='contain'
+            source={good} >
+          </Image>
+        </View>
+        <View style={{ marginLeft: 10, flex: 1, flexDirection: 'column' }}>
+          <View style={{ flexDirection: 'row', paddingTop: 5, paddingBottom: 5 }}>
+            <Image source={time}></Image>
+            <Text style={styles.profileText}>{item.datee}</Text>
+          </View>
+          <View style={{ flexDirection: 'row', paddingTop: 5, paddingBottom: 5 }}>
+            <Image source={leaf} style={{ height: 25, width: 20 }}></Image>
+            <Text style={styles.profileText}>{item.hours}</Text>
+          </View>
+          <View style={{ flexDirection: 'row', paddingTop: 5, paddingBottom: 5 }}>
+            <Image source={icLocation} style={{ height: 25, width: 20 }}></Image>
+            <Text style={styles.profileText}>{item.address}</Text>
+          </View>
+        </View>
+        <Image style={styles.userImage}
+          resizeMode='contain'
+          source={icForwardArrow} >
+        </Image>
+      </View>
+    )
+  }
   return (
 
     <ImageBackground style={styles.container}
       resizeMode="stretch"
       source={PagerBg}>
       <View style={{ flex: 1, }}>
-     
-        <Text style={styles.title}>{Constants.APP_STRINGS.JOURNAL}</Text>
-        
 
-      
+        <Text style={styles.title}>{Constants.APP_STRINGS.TIMER}</Text>
+
+        <View style={styles.headingView}>
+          <TouchableOpacity onPress={() => {
+            setIsDaily(true);
+          }}>
+            <View style={styles.inActiveView} >
+              <Text style={styles.optionsText}>{Constants.APP_STRINGS.DAILY}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => {
+            setIsDaily(false);
+          }}>
+            <View style={styles.activeView} >
+              <Text style={styles.optionsTextA}>{Constants.APP_STRINGS.WEEKLY}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <Cal />
+        <View style={{ marginTop: -30, }}>
+          <VictoryChart domainPadding={20}
+            height={250}
+            style={{ top: 20 }}
+            theme={VictoryTheme.material}>
+            <VictoryBar
+              style={{ data: { fill: Constants.APP_COLOR.GRAPH_BAR_COLOR } }}
+              data={data}
+              // data accessor for x values
+              x="time"
+              // data accessor for y values
+              y="hours" />
+          </VictoryChart>
+        </View>
+        <View
+          style={{ alignItems: 'center', padding: 15, flexDirection: 'row', margin: 10 }}>
+          <View style={{ flex: 1, }}>
+            <Text style={{ textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>You have spent</Text>
+            <View style={{ flexDirection: 'row',justifyContent:'center',alignContent:'center' }}>
+              <Image source={leaf} style={{width:20,height:20,marginLeft:-5}}></Image>
+              <Text style={{ marginLeft:5,textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>3 h 10 min</Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, }}>
+            <Text style={{ textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>Average mood</Text>
+            <View style={{ flexDirection: 'row',justifyContent:'center',alignContent:'center' }}>
+              <Image source={good} style={{width:20,height:20,marginLeft:-5}}></Image>
+              <Text style={{ marginLeft:5,textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>Good</Text>
+            </View>
+          </View>
+        </View>
+        <FlatList
+          renderItem={(item) => renderListItem(item)}
+          data={list}
+          keyExtractor={(item) => item.id}
+        />
+
       </View>
     </ImageBackground >
+
 
   );
 }
 
 const styles = StyleSheet.create({
+  profileText: {
+    fontFamily: Constants.APP_FONTS.REGULAR,
+    color: Constants.APP_COLOR.BALCK,
+    fontSize: 12,
+    marginLeft: 10
+  },
+  calText: {
+    color: 'black', flex: 1, textAlign: 'center', fontSize: 16
+  },
+  calContainerView: {
+    flexDirection: 'row',
+    margin: 10,
+    padding: 10,
+    justifyContent: 'center',
+    alignContent: 'center'
+  },
+  inActiveView: {
+    marginRight: 10,
+    width: 120,
+    alignSelf: 'center',
+    alignContent: 'center',
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 60,
+    borderWidth: 1,
+    borderColor: Constants.APP_COLOR.GREEN_COLOR
+  },
+  activeView: {
+    marginLeft: 10,
+    width: 120,
+    alignSelf: 'center',
+    alignContent: 'center',
+    backgroundColor: Constants.APP_COLOR.TEXT_GREEN,
+    padding: 10,
+    borderRadius: 60
+  },
+  optionsText: {
+    fontFamily: Constants.APP_FONTS.REGULAR,
+    color: Constants.APP_COLOR.DARK_GREY,
+    fontSize: 14,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center'
+  },
+  headingView: {
+    padding: 10,
+    marginTop: 20,
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  optionsTextA: {
+    fontFamily: Constants.APP_FONTS.REGULAR,
+    color: 'white',
+    fontSize: 14,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center'
+  },
   textVIew: {
     marginLeft: 10,
     marginRight: 10,
@@ -137,8 +370,8 @@ const styles = StyleSheet.create({
     color: Constants.APP_COLOR.TEXT_GREEN
   },
   imageView: {
-    height: 180,
-    width: 350
+
+
   },
   title: {
     fontFamily: "Comfortaa-Bold",
