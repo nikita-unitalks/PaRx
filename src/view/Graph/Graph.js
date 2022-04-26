@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
   Animated,
+  ScrollView,
   Dimensions, ImageBackground,
   TouchableOpacity,
   Image
@@ -165,44 +166,49 @@ export default function Graph({ navigation }) {
             </View>
           </TouchableOpacity>
         </View>
-        <Cal />
-        <View style={{ marginTop: -30, }}>
-          <VictoryChart domainPadding={20}
-            height={250}
-            style={{ top: 20 }}
-            theme={VictoryTheme.material}>
-            <VictoryBar
-              style={{ data: { fill: Constants.APP_COLOR.GRAPH_BAR_COLOR } }}
-              data={data}
-              // data accessor for x values
-              x="time"
-              // data accessor for y values
-              y="hours" />
-          </VictoryChart>
-        </View>
-        <View
-          style={{ alignItems: 'center', padding: 15, flexDirection: 'row', margin: 10 }}>
-          <View style={{ flex: 1, }}>
-            <Text style={{ textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>You have spent</Text>
-            <View style={{ flexDirection: 'row',justifyContent:'center',alignContent:'center' }}>
-              <Image source={leaf} style={{width:20,height:20,marginLeft:-5}}></Image>
-              <Text style={{ marginLeft:5,textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>3 h 10 min</Text>
+        <ScrollView
+          contentContianerStyle={{ backgroundColor: 'transaprent', }}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.scrollViewContainer}>
+            <Cal />
+            <View style={{ marginTop: -30, }}>
+              <VictoryChart domainPadding={20}
+                height={250}
+                style={{ top: 20 }}
+                theme={VictoryTheme.material}>
+                <VictoryBar
+                  style={{ data: { fill: Constants.APP_COLOR.GRAPH_BAR_COLOR } }}
+                  data={data}
+                  // data accessor for x values
+                  x="time"
+                  // data accessor for y values
+                  y="hours" />
+              </VictoryChart>
             </View>
-          </View>
-          <View style={{ flex: 1, }}>
-            <Text style={{ textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>Average mood</Text>
-            <View style={{ flexDirection: 'row',justifyContent:'center',alignContent:'center' }}>
-              <Image source={good} style={{width:20,height:20,marginLeft:-5}}></Image>
-              <Text style={{ marginLeft:5,textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>Good</Text>
+            <View
+              style={{ alignItems: 'center', padding: 15, flexDirection: 'row', margin: 10 }}>
+              <View style={{ flex: 1, }}>
+                <Text style={{ textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>You have spent</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
+                  <Image source={leaf} style={{ width: 20, height: 20, marginLeft: -5 }}></Image>
+                  <Text style={{ marginLeft: 5, textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>3 h 10 min</Text>
+                </View>
+              </View>
+              <View style={{ flex: 1, }}>
+                <Text style={{ textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>Average mood</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
+                  <Image source={good} style={{ width: 20, height: 20, marginLeft: -5 }}></Image>
+                  <Text style={{ marginLeft: 5, textAlign: 'center', color: Constants.APP_COLOR.BALCK, fontSize: 16, fontFamily: Constants.APP_FONTS.REGULAR }}>Good</Text>
+                </View>
+              </View>
             </View>
+            <FlatList
+              renderItem={(item) => renderListItem(item)}
+              data={list}
+              keyExtractor={(item) => item.id}
+            />
           </View>
-        </View>
-        <FlatList
-          renderItem={(item) => renderListItem(item)}
-          data={list}
-          keyExtractor={(item) => item.id}
-        />
-
+        </ScrollView>
       </View>
     </ImageBackground >
 
@@ -211,6 +217,18 @@ export default function Graph({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    backgroundColor: 'transaprent',
+    flex: 1,
+    //justifyContent: 'center',
+
+  },
+  root: {
+
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'transaprent',
+  },
   profileText: {
     fontFamily: Constants.APP_FONTS.REGULAR,
     color: Constants.APP_COLOR.BALCK,
